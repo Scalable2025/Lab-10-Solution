@@ -1,4 +1,4 @@
-package com.microservices.customer.clients.notification;
+package com.microservices.notification.dto.notification;
 
 
 public class NotificationRequest {
