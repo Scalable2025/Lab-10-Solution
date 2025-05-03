@@ -4,20 +4,26 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.Optional;
 
 @Service
-public class FraudCheckService {
+public class FraudService {
 
-    FraudCheckHistoryRepository fraudCheckHistoryRepository;
+    FraudRepository fraudRepository;
 
     @Autowired
-    public FraudCheckService(FraudCheckHistoryRepository fraudCheckHistoryRepository)
+    public FraudService(FraudRepository fraudRepository)
     {
-        this.fraudCheckHistoryRepository=fraudCheckHistoryRepository;
+        this.fraudRepository=fraudRepository;
     }
 
     public boolean isFraudulentCustomer(Integer customerId) {
-        fraudCheckHistoryRepository.save(new FraudCheckHistory(customerId,false,LocalDateTime.now()));
-        return false;
+        Optional<Fraud> fraudOptional = fraudRepository.findById(customerId);
+        if (fraudOptional.isPresent()) {
+            return fraudOptional.get().getFraudster();
+        } else {
+            fraudRepository.save(new Fraud(customerId, false, LocalDateTime.now()));
+            return false;
+        }
     }
 }

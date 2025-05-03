@@ -1,0 +1,8 @@
+D:\Desktop\Scalable\Test Apps\Microservices\WithK8s\microservicesWithK8s\notification\src\main\java\com\microservices\notification\Notification.java
+D:\Desktop\Scalable\Test Apps\Microservices\WithK8s\microservicesWithK8s\notification\src\main\java\com\microservices\notification\NotificationApplication.java
+D:\Desktop\Scalable\Test Apps\Microservices\WithK8s\microservicesWithK8s\notification\src\main\java\com\microservices\notification\NotificationController.java
+D:\Desktop\Scalable\Test Apps\Microservices\WithK8s\microservicesWithK8s\notification\src\main\java\com\microservices\notification\NotificationRepository.java
+D:\Desktop\Scalable\Test Apps\Microservices\WithK8s\microservicesWithK8s\notification\src\main\java\com\microservices\notification\NotificationRequest.java
+D:\Desktop\Scalable\Test Apps\Microservices\WithK8s\microservicesWithK8s\notification\src\main\java\com\microservices\notification\NotificationService.java
+D:\Desktop\Scalable\Test Apps\Microservices\WithK8s\microservicesWithK8s\notification\src\main\java\com\microservices\notification\rabbitmq\NotificationConsumer.java
+D:\Desktop\Scalable\Test Apps\Microservices\WithK8s\microservicesWithK8s\notification\src\main\java\com\microservices\notification\rabbitmq\RabbitMQConfig.java

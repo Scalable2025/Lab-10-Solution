@@ -1,44 +1,50 @@
 package com.microservices.customer.rabbitmq;
 
-import org.springframework.amqp.core.AmqpTemplate;
-import org.springframework.amqp.rabbit.config.SimpleRabbitListenerContainerFactory;
+import org.springframework.amqp.core.Binding;
+import org.springframework.amqp.core.BindingBuilder;
+import org.springframework.amqp.core.Queue;
+import org.springframework.amqp.core.TopicExchange;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
-import org.springframework.amqp.support.converter.MessageConverter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class RabbitMQConfig {
 
-    private final ConnectionFactory connectionFactory;
+    public static final String NOTIFICATION_QUEUE = "rabbitmq.queue.notification";
+    public static final String EXCHANGE = "rabbitmq.exchanges.internal";
+    public static final String NOTIFICATION_ROUTING_KEY = "rabbitmq.routing-keys.internal-notification";
 
-    public RabbitMQConfig(ConnectionFactory connectionFactory) {
-        this.connectionFactory = connectionFactory;
+    @Bean
+    public TopicExchange internalTopicExchange() {
+        return new TopicExchange(EXCHANGE);
     }
 
     @Bean
-    public AmqpTemplate amqpTemplate() {
+    public Queue notificationQueue() {
+        return new Queue(NOTIFICATION_QUEUE);
+    }
+
+    @Bean
+    public Binding interalToNotificationBinding() {
+        return BindingBuilder
+                .bind(notificationQueue())
+                .to(internalTopicExchange())
+                .with(NOTIFICATION_ROUTING_KEY);
+    }
+
+    @Bean
+    public RabbitTemplate rabbitTemplate(ConnectionFactory connectionFactory) {
         RabbitTemplate rabbitTemplate = new RabbitTemplate(connectionFactory);
-        rabbitTemplate.setMessageConverter(jacksonConverter());
+        rabbitTemplate.setMessageConverter(messageConverter());
         return rabbitTemplate;
     }
 
     @Bean
-    public SimpleRabbitListenerContainerFactory simpleRabbitListenerContainerFactory() {
-        SimpleRabbitListenerContainerFactory factory =
-                new SimpleRabbitListenerContainerFactory();
-        factory.setConnectionFactory(connectionFactory);
-        factory.setMessageConverter(jacksonConverter());
-        return factory;
-    }
-
-    @Bean
-    public MessageConverter jacksonConverter() {
-        MessageConverter jackson2JsonMessageConverter =
-                new Jackson2JsonMessageConverter();
-        return jackson2JsonMessageConverter;
+    public Jackson2JsonMessageConverter messageConverter() {
+        return new Jackson2JsonMessageConverter();
     }
 
 }

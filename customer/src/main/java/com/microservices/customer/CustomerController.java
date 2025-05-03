@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("api/v1/customers")
+@RequestMapping("/customer")
 public class CustomerController {
     CustomerService customerService;
 
@@ -18,8 +18,7 @@ public class CustomerController {
     }
 
     @PostMapping
-    public void registerCustomer(@RequestBody CustomerRegistrationRequest customerRegistrationRequest) {
-        //log.info("Registering new customer: {}", customerRegistrationRequest);
-        customerService.registerCustomer(customerRegistrationRequest);
+    public void registerCustomer(@RequestBody Customer customer) {
+        customerService.registerCustomer(customer);
     }
 }

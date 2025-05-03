@@ -1,5 +1,6 @@
 package com.microservices.customer.rabbitmq;
 
+import com.microservices.customer.dto.NotificationRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,9 +17,7 @@ public class RabbitMQMessageProducer {
         this.rabbitTemplate = rabbitTemplate;
     }
 
-    public void publish(Object payload, String exchange, String routingKey) {
-        //log.info("Publishing to {} using routingKey {}. Payload: {}", exchange, routingKey, payload);
+    public void publish(NotificationRequest payload, String exchange, String routingKey) {
         rabbitTemplate.convertAndSend(exchange, routingKey, payload);
-        //log.info("Published to {} using routingKey {}. Payload: {}", exchange, routingKey, payload);
     }
 }

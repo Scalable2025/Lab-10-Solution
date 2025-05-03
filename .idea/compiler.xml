@@ -2,19 +2,32 @@
 <project version="4">
   <component name="CompilerConfiguration">
     <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
       <profile name="Maven default annotation processors profile" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="shipping" />
-        <module name="inventory" />
-        <module name="orders" />
+        <module name="apigw" />
+        <module name="notification" />
+        <module name="fraud" />
+        <module name="customer" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="eureka-server" target="23" />
+      <module name="inventory" target="24" />
+      <module name="orders" target="24" />
+      <module name="shipping" target="24" />
+    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="apigw" options="-parameters" />
+      <module name="customer" options="-parameters" />
+      <module name="eureka-server" options="-parameters" />
+      <module name="fraud" options="-parameters" />
       <module name="inventory" options="-parameters" />
+      <module name="notification" options="-parameters" />
       <module name="orders" options="-parameters" />
       <module name="shipping" options="-parameters" />
     </option>

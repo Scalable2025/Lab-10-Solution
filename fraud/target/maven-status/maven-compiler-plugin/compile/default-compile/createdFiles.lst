@@ -1,0 +1,5 @@
+com\microservices\fraud\FraudController.class
+com\microservices\fraud\FraudService.class
+com\microservices\fraud\FraudRepository.class
+com\microservices\fraud\Fraud.class
+com\microservices\fraud\FraudApplication.class

@@ -1,34 +1,24 @@
 package com.microservices.fraud;
 
-import jakarta.persistence.*;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.redis.core.RedisHash;
 
-
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
-
-@Entity
-@Table(name = "fraud")
-public class FraudCheckHistory {
+@RedisHash("fraud")
+public class Fraud implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
-    private Integer customerId;
+    private Integer customerId;  // Use customerId as Redis key
+
     private Boolean isFraudster;
     private LocalDateTime createdAt;
 
-
-    public FraudCheckHistory() {
+    public Fraud() {
     }
 
-    public FraudCheckHistory(Integer customerId, Boolean isFraudster, LocalDateTime createdAt) {
-        this.customerId = customerId;
-        this.isFraudster = isFraudster;
-        this.createdAt = createdAt;
-    }
-
-    public FraudCheckHistory(Integer id, Integer customerId, Boolean isFraudster, LocalDateTime createdAt) {
-        this.id = id;
+    public Fraud(Integer customerId, Boolean isFraudster, LocalDateTime createdAt) {
         this.customerId = customerId;
         this.isFraudster = isFraudster;
         this.createdAt = createdAt;
@@ -42,4 +32,19 @@ public class FraudCheckHistory {
         isFraudster = fraudster;
     }
 
+    public Integer getCustomerId() {
+        return customerId;
+    }
+
+    public void setCustomerId(Integer customerId) {
+        this.customerId = customerId;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
 }

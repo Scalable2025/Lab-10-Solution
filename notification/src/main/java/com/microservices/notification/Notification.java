@@ -1,22 +1,17 @@
 package com.microservices.notification;
 
 
-import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDateTime;
 
-
-@Entity
-@Table(name = "notification")
+@Document(collection = "notification")
 public class Notification {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer notificationId;
+    private String notificationId; // MongoDB uses String ObjectId by default
+
     private Integer toCustomerId;
     private String toCustomerEmail;
     private String sender;
@@ -26,7 +21,7 @@ public class Notification {
     public Notification() {
     }
 
-    public Notification(Integer notificationId, Integer toCustomerId, String toCustomerEmail, String message, String sender, LocalDateTime sentAt) {
+    public Notification(String notificationId, Integer toCustomerId, String toCustomerEmail, String message, String sender, LocalDateTime sentAt) {
         this.notificationId = notificationId;
         this.toCustomerId = toCustomerId;
         this.toCustomerEmail = toCustomerEmail;
@@ -43,11 +38,11 @@ public class Notification {
         this.sentAt = sentAt;
     }
 
-    public Integer getNotificationId() {
+    public String getNotificationId() {
         return notificationId;
     }
 
-    public void setNotificationId(Integer notificationId) {
+    public void setNotificationId(String notificationId) {
         this.notificationId = notificationId;
     }
 

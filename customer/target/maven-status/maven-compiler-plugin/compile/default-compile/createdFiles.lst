@@ -1,0 +1,9 @@
+com\microservices\customer\CustomerController.class
+com\microservices\customer\dto\NotificationRequest.class
+com\microservices\customer\rabbitmq\RabbitMQConfig.class
+com\microservices\customer\clients\FraudClient.class
+com\microservices\customer\CustomerRepository.class
+com\microservices\customer\rabbitmq\RabbitMQMessageProducer.class
+com\microservices\customer\CustomerApplication.class
+com\microservices\customer\CustomerService.class
+com\microservices\customer\Customer.class

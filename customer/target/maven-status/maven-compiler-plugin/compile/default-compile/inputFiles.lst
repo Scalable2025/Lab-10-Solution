@@ -1,0 +1,9 @@
+D:\Desktop\Scalable\Test Apps\Microservices\WithK8s\microservicesWithK8s\customer\src\main\java\com\microservices\customer\clients\FraudClient.java
+D:\Desktop\Scalable\Test Apps\Microservices\WithK8s\microservicesWithK8s\customer\src\main\java\com\microservices\customer\Customer.java
+D:\Desktop\Scalable\Test Apps\Microservices\WithK8s\microservicesWithK8s\customer\src\main\java\com\microservices\customer\CustomerApplication.java
+D:\Desktop\Scalable\Test Apps\Microservices\WithK8s\microservicesWithK8s\customer\src\main\java\com\microservices\customer\CustomerController.java
+D:\Desktop\Scalable\Test Apps\Microservices\WithK8s\microservicesWithK8s\customer\src\main\java\com\microservices\customer\CustomerRepository.java
+D:\Desktop\Scalable\Test Apps\Microservices\WithK8s\microservicesWithK8s\customer\src\main\java\com\microservices\customer\CustomerService.java
+D:\Desktop\Scalable\Test Apps\Microservices\WithK8s\microservicesWithK8s\customer\src\main\java\com\microservices\customer\dto\NotificationRequest.java
+D:\Desktop\Scalable\Test Apps\Microservices\WithK8s\microservicesWithK8s\customer\src\main\java\com\microservices\customer\rabbitmq\RabbitMQConfig.java
+D:\Desktop\Scalable\Test Apps\Microservices\WithK8s\microservicesWithK8s\customer\src\main\java\com\microservices\customer\rabbitmq\RabbitMQMessageProducer.java

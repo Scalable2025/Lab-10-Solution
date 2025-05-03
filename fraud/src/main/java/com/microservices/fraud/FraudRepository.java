@@ -1,8 +1,6 @@
 package com.microservices.fraud;
 
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
+import org.springframework.data.repository.CrudRepository;
 
-@Repository
-public interface FraudCheckHistoryRepository extends JpaRepository<FraudCheckHistory, Integer> {
+public interface FraudRepository extends CrudRepository<Fraud, Integer> {
 }

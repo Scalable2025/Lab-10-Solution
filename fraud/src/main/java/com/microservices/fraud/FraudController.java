@@ -1,7 +1,5 @@
 package com.microservices.fraud;
 
-import com.microservices.clients.fraud.FraudCheckResponse;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -9,21 +7,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("api/v1/fraud-check")
+@RequestMapping("/fraud")
 public class FraudController {
 
-    FraudCheckService fraudCheckService;
+    FraudService fraudService;
 
     @Autowired
-    public FraudController(FraudCheckService fraudCheckService)
+    public FraudController(FraudService fraudService)
     {
-        this.fraudCheckService = fraudCheckService;
+        this.fraudService = fraudService;
     }
 
     @GetMapping("/{customerId}")
-    public FraudCheckResponse isFraudster(@PathVariable("customerId") Integer customerID) {
-        boolean isFraudster = fraudCheckService.isFraudulentCustomer(customerID);
-        //log.info("fraud check request for customer: {}", customerID);
-        return new FraudCheckResponse(isFraudster);
+    public boolean isFraudster(@PathVariable("customerId") Integer customerID) {
+        return fraudService.isFraudulentCustomer(customerID);
     }
 }

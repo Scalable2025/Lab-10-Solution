@@ -1,33 +1,30 @@
-package com.microservices.notification;
+package com.microservices.notification.rabbitmq;
 
 import org.springframework.amqp.core.Binding;
 import org.springframework.amqp.core.BindingBuilder;
 import org.springframework.amqp.core.Queue;
 import org.springframework.amqp.core.TopicExchange;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.amqp.rabbit.connection.ConnectionFactory;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
+import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-public class NotificationConfig {
+public class RabbitMQConfig {
 
-    @Value("${rabbitmq.exchanges.internal}")
-    public String internalExchange;
-
-    @Value("${rabbitmq.queue.notification}")
-    public String notificationQueue;
-
-    @Value("${rabbitmq.routing-keys.internal-notification}")
-    public String internalNotificationRoutingKey;
+    public static final String NOTIFICATION_QUEUE = "rabbitmq.queue.notification";
+    public static final String EXCHANGE = "rabbitmq.exchanges.internal";
+    public static final String NOTIFICATION_ROUTING_KEY = "rabbitmq.routing-keys.internal-notification";
 
     @Bean
     public TopicExchange internalTopicExchange() {
-        return new TopicExchange(this.internalExchange);
+        return new TopicExchange(EXCHANGE);
     }
 
     @Bean
     public Queue notificationQueue() {
-        return new Queue(this.notificationQueue);
+        return new Queue(NOTIFICATION_QUEUE);
     }
 
     @Bean
@@ -35,18 +32,18 @@ public class NotificationConfig {
         return BindingBuilder
                 .bind(notificationQueue())
                 .to(internalTopicExchange())
-                .with(internalNotificationRoutingKey);
+                .with(NOTIFICATION_ROUTING_KEY);
     }
 
-    public String getInternalExchange() {
-        return internalExchange;
+    @Bean
+    public RabbitTemplate rabbitTemplate(ConnectionFactory connectionFactory) {
+        RabbitTemplate rabbitTemplate = new RabbitTemplate(connectionFactory);
+        rabbitTemplate.setMessageConverter(messageConverter());
+        return rabbitTemplate;
     }
 
-    public String getNotificationQueue() {
-        return notificationQueue;
-    }
-
-    public String getInternalNotificationRoutingKey() {
-        return internalNotificationRoutingKey;
+    @Bean
+    public Jackson2JsonMessageConverter messageConverter() {
+        return new Jackson2JsonMessageConverter();
     }
 }
